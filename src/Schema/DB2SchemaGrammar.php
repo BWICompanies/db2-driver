@@ -446,9 +446,7 @@ class DB2SchemaGrammar extends Grammar
      */
     protected function typeText(Fluent $column)
     {
-        $colLength = ($column->length ? $column->length : 16369);
-
-        return "varchar($colLength)";
+        return "clob(64K)";
     }
 
     /**
