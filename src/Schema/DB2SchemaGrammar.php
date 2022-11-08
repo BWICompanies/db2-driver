@@ -446,7 +446,7 @@ class DB2SchemaGrammar extends Grammar
      */
     protected function typeText(Fluent $column)
     {
-        return "clob(64K)";
+        return 'clob(64K)';
     }
 
     /**

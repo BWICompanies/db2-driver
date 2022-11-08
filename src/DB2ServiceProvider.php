@@ -13,7 +13,6 @@ class DB2ServiceProvider extends ServiceProvider
          * Override any database connections using the 'db2' driver.
          */
         Connection::resolverFor('db2', function ($connection, $database, $prefix, $config) {
-            
             $connector = new DB2Connector();
 
             $connection = new Db2Connection(
