@@ -15,7 +15,7 @@ class DB2ServiceProvider extends ServiceProvider
         Connection::resolverFor('db2', function ($connection, $database, $prefix, $config) {
             $connector = new DB2Connector();
 
-            $connection = new Db2Connection(
+            $connection = new DB2Connection(
                 $connector->connect($config),
                 $database,
                 $prefix,
