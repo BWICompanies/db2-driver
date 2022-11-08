@@ -20,7 +20,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            Db2DriverServiceProvider::class,
+            DB2DriverServiceProvider::class,
         ];
     }
 

@@ -1,5 +1,5 @@
 <?php
 
-use BWICompanies\Db2Driver\Tests\TestCase;
+use BWICompanies\DB2Driver\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

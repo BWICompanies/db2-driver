@@ -2,7 +2,7 @@
 
 namespace BWICompanies\DB2Driver;
 
-use BWICompanies\Db2Driver\DB2QueryGrammar;
+use BWICompanies\DB2Driver\DB2QueryGrammar;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Processors\Processor;
 
