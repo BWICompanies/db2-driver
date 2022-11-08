@@ -2,7 +2,6 @@
 
 namespace BWICompanies\DB2Driver\Schema;
 
-use BWICompanies\Db2Driver\Schema\DB2Blueprint;
 use Closure;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;

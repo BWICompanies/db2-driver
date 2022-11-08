@@ -16,7 +16,12 @@ class DB2ServiceProvider extends ServiceProvider
             
             $connector = new DB2Connector();
 
-            $connection = new Db2Connection($connector->connect($config));
+            $connection = new Db2Connection(
+                $connector->connect($config),
+                $database,
+                $prefix,
+                $config
+            );
 
             return $connection;
         });
