@@ -15,7 +15,7 @@ class DB2Connector extends Connector implements ConnectorInterface
             $this->getOptions($config)
         );
 
-        if (isset($config['schema'])) {
+        if (isset($config['schema']) && $config['schema'] !== '') {
             $schema = $config['schema'];
 
             $connection->prepare('set schema '.$schema)
