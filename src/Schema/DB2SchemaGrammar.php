@@ -648,6 +648,19 @@ class DB2SchemaGrammar extends Grammar
     }
 
     /**
+     * Create the column definition for a UUID type
+     *
+     * @param  \Illuminate\Support\Fluent  $column
+     * @return string
+     */
+    protected function typeUuid(Fluent $column)
+    {
+        return 'char(36)';
+    }
+
+
+
+    /**
      * Get the SQL for a nullable column modifier.
      *
      * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
