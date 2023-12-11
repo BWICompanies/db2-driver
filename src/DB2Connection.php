@@ -50,7 +50,7 @@ class DB2Connection extends Connection
      */
     public function setCurrentSchema(string $schema)
     {
-        $this->statement('SET SCHEMA ?', [strtoupper($schema)]);
+        $this->statement('SET SCHEMA ?', [$schema !== "" ? strtoupper($schema) : "DEFAULT"]);
     }
 
     /**
