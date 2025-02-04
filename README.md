@@ -29,6 +29,7 @@ Add a new connection in `database.php`:
     'schema'        => env('DB_SCHEMA'),
     'port'          => env('DB_PORT', 50000),
     'date_format'   => 'Y-m-d H:i:s', // or 'Y-m-d H:i:s.u' / 'Y-m-d-H.i.s.u'
+    'offset_compatibility_mode' => true,
     'odbc_keywords' => [
         'SIGNON'                => 3,
         'SSL'                   => 0,
