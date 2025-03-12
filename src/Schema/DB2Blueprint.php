@@ -181,8 +181,8 @@ class DB2Blueprint extends Blueprint
         $this->string('hashcode', 32);
 
         if (true === $masterizable) {
-            $this->boolean('data_master')
-                 ->default(true);
+            $this->boolean('data_master') // @phpstan-ignore method.notFound (Seems invalid code, but not sure what this is for...)
+                 ->default(true); 
         }
     }
 

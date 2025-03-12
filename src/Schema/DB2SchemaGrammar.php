@@ -7,6 +7,7 @@ use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Support\Fluent;
+use BWICompanies\DB2Driver\Schema\DB2Blueprint;
 
 class DB2SchemaGrammar extends Grammar
 {
@@ -814,12 +815,12 @@ class DB2SchemaGrammar extends Grammar
     /**
      * Compile an addReplyListEntry command.
      *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \BWICompanies\DB2Driver\Schema\DB2Blueprint  $blueprint
      * @param  \Illuminate\Support\Fluent  $command
      * @param  \Illuminate\Database\Connection  $connection
      * @return string
      */
-    public function compileAddReplyListEntry(Blueprint $blueprint, Fluent $command, Connection $connection)
+    public function compileAddReplyListEntry(DB2Blueprint $blueprint, Fluent $command, Connection $connection)
     {
         $sequenceNumberQuery = <<<'EOT'
             with reply_list_info(sequence_number) as (
@@ -847,11 +848,11 @@ EOT;
     /**
      * Compile a removeReplyListEntry command.
      *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \BWICompanies\DB2Driver\Schema\DB2Blueprint  $blueprint
      * @param  \Illuminate\Support\Fluent  $command
      * @return string
      */
-    public function compileRemoveReplyListEntry(Blueprint $blueprint, Fluent $command)
+    public function compileRemoveReplyListEntry(DB2Blueprint $blueprint, Fluent $command)
     {
         $sequenceNumber = $blueprint->getReplyListSequenceNumber();
         $command->command = "RMVRPYLE SEQNBR($sequenceNumber)";

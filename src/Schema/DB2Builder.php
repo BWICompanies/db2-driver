@@ -9,6 +9,20 @@ use Illuminate\Database\Schema\Builder;
 class DB2Builder extends Builder
 {
     /**
+     * The schema grammar instance.
+     *
+     * @var \BWICompanies\DB2Driver\Schema\DB2SchemaGrammar
+     */
+    protected $grammar;
+
+    /**
+     * The database connection instance.
+     *
+     * @var \BWICompanies\DB2Driver\DB2Connection
+     */
+    protected $connection;
+
+    /**
      * Determine if the given table exists.
      */
     public function hasTable($table): bool
