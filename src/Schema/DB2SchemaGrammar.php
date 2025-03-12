@@ -157,7 +157,7 @@ class DB2SchemaGrammar extends Grammar
      *
      * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
      * @param  \Illuminate\Support\Fluent  $command
-     * @return string
+     * @return array<int, string>
      */
     public function compileAdd(Blueprint $blueprint, Fluent $command)
     {

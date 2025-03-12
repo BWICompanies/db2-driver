@@ -36,7 +36,7 @@ class DB2Blueprint extends Blueprint
      * Set the sequence number of reply list entries.
      *
      * @param  int  $replyListSequenceNumber
-     * @return void
+     * @return int
      */
     public function setReplyListSequenceNumber(int $replyListSequenceNumber)
     {
