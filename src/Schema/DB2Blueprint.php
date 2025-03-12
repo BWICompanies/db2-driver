@@ -16,6 +16,13 @@ class DB2Blueprint extends Blueprint
     private $replyListSequenceNumber;
 
     /**
+     * The system name for the table.
+     * 
+     * @var string
+     */
+    protected $systemName;
+
+    /**
      * Get the sequence number of reply list entries.
      *
      * @return int
@@ -72,6 +79,16 @@ class DB2Blueprint extends Blueprint
     public function forSystemName($systemName)
     {
         $this->systemName = $systemName;
+    }
+
+    /**
+     * Returns the system name for the table.
+     * 
+     * @return string 
+     */
+    public function getSystemName()
+    {
+        return $this->systemName;
     }
 
     /**
