@@ -24,7 +24,11 @@ class DB2Builder extends Builder
 
     /**
      * Determine if the given table exists.
+     *
+     * @param string $table
+     * @return bool
      */
+
     public function hasTable($table): bool
     {
         $sql = $this->grammar->compileTableExists();
@@ -46,6 +50,9 @@ class DB2Builder extends Builder
 
     /**
      * Get the column listing for a given table.
+     *
+     * @param string $table
+     * @return array
      */
     public function getColumnListing($table): array
     {
@@ -73,8 +80,11 @@ class DB2Builder extends Builder
         }, $res));
     }
 
-    /**
+     /**
      * Execute the blueprint to build / modify the table.
+     *
+     * @param Blueprint $blueprint
+     * @return void
      */
     protected function build(Blueprint $blueprint)
     {
@@ -88,15 +98,19 @@ class DB2Builder extends Builder
         $this->connection->resetCurrentSchema();
     }
 
-    /**
+     /**
      * Create a new command set with a Closure.
+     *
+     * @param string        $table
+     * @param null|\Closure $callback
+     * @return DB2Blueprint
      */
     protected function createBlueprint($table, ?Closure $callback = null)
     {
-        if (isset($this->resolver)) {
+        if (isset($this->resolver)) { // @phpstan-ignore isset.property
             return call_user_func($this->resolver, $table, $callback);
         }
 
-        return new DB2Blueprint($table, $callback);
+        return new DB2Blueprint($table, $callback); // @phpstan-ignore deadCode.unreachable 
     }
 }

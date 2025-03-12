@@ -214,7 +214,7 @@ class DB2QueryGrammar extends Grammar
      */
     public function getDateFormat()
     {
-        return $this->dateFormat ?? parent::getDateFormat();
+        return $this->dateFormat ?? parent::getDateFormat(); // @phpstan-ignore nullCoalesce.property
     }
 
     /**
