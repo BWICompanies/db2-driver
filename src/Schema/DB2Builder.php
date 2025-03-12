@@ -2,6 +2,7 @@
 
 namespace BWICompanies\DB2Driver\Schema;
 
+use BWICompanies\DB2Driver\DB2Processor;
 use Closure;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
@@ -72,8 +73,17 @@ class DB2Builder extends Builder
             $table,
         ]);
 
-        $res = $this->connection->getPostProcessor()
-                                ->processColumnListing($results);
+        
+        $postProcessor = $this->connection->getPostProcessor();
+
+        // Ensure $postProcessor is a DB2Processor, since getPostProcessor() 
+        // returns a general Processor type that lacks processColumnListing().
+        if (!($postProcessor instanceof DB2Processor)) {
+            throw new \Exception('Invalid post-processor: expected DB2Processor or a subclass.');
+        }
+
+        // Now it's safe to call processColumnListing().
+        $res = $postProcessor->processColumnListing($results);
 
         return array_values(array_map(function ($r) {
             return $r->column_name;
