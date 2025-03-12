@@ -75,6 +75,7 @@ class DB2Blueprint extends Blueprint
      * Specify a system name for the table.
      *
      * @param  string  $systemName
+     * @return void
      */
     public function forSystemName($systemName)
     {
@@ -173,6 +174,9 @@ class DB2Blueprint extends Blueprint
 
     /**
      * ^NOTE: No idea what this col is for
+     * @param string    $index
+     * @param bool      $masterizable
+     * @return void
      */
     public function synchro($index, $masterizable = false)
     {
@@ -188,6 +192,8 @@ class DB2Blueprint extends Blueprint
 
     /**
      * ^NOTE: No idea what this col is for
+     * @param string|array $index
+     * @return void
      */
     public function dropSynchro($index)
     {

@@ -11,14 +11,25 @@ class DB2Connection extends Connection
 {
     /**
      * The name of the default schema.
+     * @var string
      */
     protected $defaultSchema;
 
     /**
      * The name of the current schema in use.
+     * @var string
      */
     protected $currentSchema;
 
+    /**
+     * Create a new database connection instance.
+     *
+     * @param  \PDO                 $pdo
+     * @param  string               $database
+     * @param  string               $tablePrefix
+     * @param  array<mixed, mixed>  $config
+     * @return void
+     */
     public function __construct(
         PDO $pdo,
         string $database = '',
@@ -39,6 +50,7 @@ class DB2Connection extends Connection
 
     /**
      * Reset to default the current schema.
+     * @return void
      */
     public function resetCurrentSchema()
     {
@@ -47,6 +59,7 @@ class DB2Connection extends Connection
 
     /**
      * Set the name of the current schema.
+     * @return void
      */
     public function setCurrentSchema(string $schema)
     {
@@ -55,6 +68,8 @@ class DB2Connection extends Connection
 
     /**
      * Execute a system command on IBMi.
+     * @param string $command
+     * @return void
      */
     public function executeCommand($command)
     {
@@ -63,6 +78,7 @@ class DB2Connection extends Connection
 
     /**
      * Get a schema builder instance for the connection.
+     * @return void|DB2Builder
      */
     public function getSchemaBuilder()
     {

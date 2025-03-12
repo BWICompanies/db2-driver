@@ -14,7 +14,7 @@ class DB2SchemaGrammar extends Grammar
     /**
      * The possible column modifiers.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $preModifiers = ['ForColumn'];
 
@@ -31,7 +31,7 @@ class DB2SchemaGrammar extends Grammar
     /**
      * The possible column serials
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $serials = [
         'smallInteger',
@@ -77,9 +77,9 @@ class DB2SchemaGrammar extends Grammar
     /**
      * Compile a create table command.
      *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-     * @param  \Illuminate\Support\Fluent  $command
-     * @param  \Illuminate\Database\Connection  $connection
+     * @param  \Illuminate\Database\Schema\Blueprint    $blueprint
+     * @param  \Illuminate\Support\Fluent               $command
+     * @param  \Illuminate\Database\Connection          $connection
      * @return string
      */
     public function compileCreate(Blueprint $blueprint, Fluent $command, Connection $connection)
