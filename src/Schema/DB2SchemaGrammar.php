@@ -2,6 +2,7 @@
 
 namespace BWICompanies\DB2Driver\Schema;
 
+use BackedEnum;;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
@@ -793,11 +794,17 @@ class DB2SchemaGrammar extends Grammar
      */
     protected function getDefaultValue($value)
     {
-        if ($value instanceof Expression || is_bool($value) || is_numeric($value)) {
-            return $value;
+        if ($value instanceof Expression) {
+            $value = $this->getValue($value);
         }
 
-        return "'".strval($value)."'";
+        if ($value instanceof BackedEnum) {
+            $value = $value->value;
+        }
+
+        return is_bool($value)
+                    ? "'".(int) $value."'"
+                    : "'".(string) $value."'";
     }
 
     /**

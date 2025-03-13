@@ -105,7 +105,7 @@ class DB2QueryGrammar extends Grammar
 
         $columns = (! empty($components['columns']) ? $components['columns'].', ' : 'select');
 
-        if ($columns == 'select *, ' && $query->from) {
+        if ($columns == 'select *, ' && $query->from && is_string($query->from)) {
             $columns = 'select '.$this->tablePrefix.$query->from.'.*, ';
         }
 
@@ -214,6 +214,8 @@ class DB2QueryGrammar extends Grammar
      */
     public function getDateFormat()
     {
+        // PHPStan assumes $this->dateFormat is always set due to its docblock type.  
+        // But since it's not a native type, PHP cant't guarantee it’s always set.  
         return $this->dateFormat ?? parent::getDateFormat(); // @phpstan-ignore nullCoalesce.property
     }
 

@@ -11,4 +11,4 @@ parameters:
     ignoreErrors:
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
-    level: 6
+    level: 8

@@ -117,10 +117,15 @@ class DB2Builder extends Builder
      */
     protected function createBlueprint($table, ?Closure $callback = null)
     {
+        // PHPStan warns that $this->resolver is always set because it's documented as a \Closure.
+        // However, since this is only defined in a docblock (not enforced in PHP), we check it anyway.
+        // Ignoring `isset.property` warning as a precaution.
         if (isset($this->resolver)) { // @phpstan-ignore isset.property
             return call_user_func($this->resolver, $table, $callback);
         }
 
+        // Since PHPStan assumes the if-condition is always true, it marks this as unreachable code.
+        // Ignoring `deadCode.unreachable` because we're explicitly handling a case that should never happen.
         return new DB2Blueprint($table, $callback); // @phpstan-ignore deadCode.unreachable 
     }
 }
