@@ -2,18 +2,20 @@
 
 namespace BWICompanies\DB2Driver\Schema;
 
+use BackedEnum;;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Grammars\Grammar;
 use Illuminate\Support\Fluent;
+use BWICompanies\DB2Driver\Schema\DB2Blueprint;
 
 class DB2SchemaGrammar extends Grammar
 {
     /**
      * The possible column modifiers.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $preModifiers = ['ForColumn'];
 
@@ -30,7 +32,7 @@ class DB2SchemaGrammar extends Grammar
     /**
      * The possible column serials
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $serials = [
         'smallInteger',
@@ -76,9 +78,9 @@ class DB2SchemaGrammar extends Grammar
     /**
      * Compile a create table command.
      *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
-     * @param  \Illuminate\Support\Fluent  $command
-     * @param  \Illuminate\Database\Connection  $connection
+     * @param  \Illuminate\Database\Schema\Blueprint    $blueprint
+     * @param  \Illuminate\Support\Fluent               $command
+     * @param  \Illuminate\Database\Connection          $connection
      * @return string
      */
     public function compileCreate(Blueprint $blueprint, Fluent $command, Connection $connection)
@@ -156,7 +158,7 @@ class DB2SchemaGrammar extends Grammar
      *
      * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
      * @param  \Illuminate\Support\Fluent  $command
-     * @return string
+     * @return array<int, string>
      */
     public function compileAdd(Blueprint $blueprint, Fluent $command)
     {
@@ -792,11 +794,17 @@ class DB2SchemaGrammar extends Grammar
      */
     protected function getDefaultValue($value)
     {
-        if ($value instanceof Expression || is_bool($value) || is_numeric($value)) {
-            return $value;
+        if ($value instanceof Expression) {
+            $value = $this->getValue($value);
         }
 
-        return "'".strval($value)."'";
+        if ($value instanceof BackedEnum) {
+            $value = $value->value;
+        }
+
+        return is_bool($value)
+                    ? "'".(int) $value."'"
+                    : "'".(string) $value."'";
     }
 
     /**
@@ -814,12 +822,12 @@ class DB2SchemaGrammar extends Grammar
     /**
      * Compile an addReplyListEntry command.
      *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \BWICompanies\DB2Driver\Schema\DB2Blueprint  $blueprint
      * @param  \Illuminate\Support\Fluent  $command
      * @param  \Illuminate\Database\Connection  $connection
      * @return string
      */
-    public function compileAddReplyListEntry(Blueprint $blueprint, Fluent $command, Connection $connection)
+    public function compileAddReplyListEntry(DB2Blueprint $blueprint, Fluent $command, Connection $connection)
     {
         $sequenceNumberQuery = <<<'EOT'
             with reply_list_info(sequence_number) as (
@@ -847,11 +855,11 @@ EOT;
     /**
      * Compile a removeReplyListEntry command.
      *
-     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \BWICompanies\DB2Driver\Schema\DB2Blueprint  $blueprint
      * @param  \Illuminate\Support\Fluent  $command
      * @return string
      */
-    public function compileRemoveReplyListEntry(Blueprint $blueprint, Fluent $command)
+    public function compileRemoveReplyListEntry(DB2Blueprint $blueprint, Fluent $command)
     {
         $sequenceNumber = $blueprint->getReplyListSequenceNumber();
         $command->command = "RMVRPYLE SEQNBR($sequenceNumber)";

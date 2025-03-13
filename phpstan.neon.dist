@@ -1,0 +1,14 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+parameters:
+    paths:
+        - src/
+        - tests/
+    treatPhpDocTypesAsCertain: false
+    universalObjectCratesClasses:
+        - Illuminate\Support\Fluent
+    ignoreErrors:
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
+    level: 8

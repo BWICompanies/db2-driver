@@ -8,6 +8,16 @@ use Illuminate\Database\Query\Processors\Processor;
 
 class DB2Processor extends Processor
 {
+    /**
+     * Process an  "insert get ID" query.
+     *
+     * @param  \Illuminate\Database\Query\Builder   $query
+     * @param  string                               $sql
+     * @param  array                                $values
+     * @param  string|null                          $sequence
+     * 
+     * @return int|array
+     */
     public function processInsertGetId(Builder $query, $sql, $values, $sequence = null)
     {
         $sequenceStr = $sequence ?: 'id';

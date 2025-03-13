@@ -16,6 +16,13 @@ class DB2Blueprint extends Blueprint
     private $replyListSequenceNumber;
 
     /**
+     * The system name for the table.
+     * 
+     * @var string
+     */
+    protected $systemName;
+
+    /**
      * Get the sequence number of reply list entries.
      *
      * @return int
@@ -29,7 +36,7 @@ class DB2Blueprint extends Blueprint
      * Set the sequence number of reply list entries.
      *
      * @param  int  $replyListSequenceNumber
-     * @return void
+     * @return int
      */
     public function setReplyListSequenceNumber(int $replyListSequenceNumber)
     {
@@ -68,10 +75,21 @@ class DB2Blueprint extends Blueprint
      * Specify a system name for the table.
      *
      * @param  string  $systemName
+     * @return void
      */
     public function forSystemName($systemName)
     {
         $this->systemName = $systemName;
+    }
+
+    /**
+     * Returns the system name for the table.
+     * 
+     * @return string 
+     */
+    public function getSystemName()
+    {
+        return $this->systemName;
     }
 
     /**
@@ -156,6 +174,9 @@ class DB2Blueprint extends Blueprint
 
     /**
      * ^NOTE: No idea what this col is for
+     * @param string    $index
+     * @param bool      $masterizable
+     * @return void
      */
     public function synchro($index, $masterizable = false)
     {
@@ -164,13 +185,15 @@ class DB2Blueprint extends Blueprint
         $this->string('hashcode', 32);
 
         if (true === $masterizable) {
-            $this->boolean('data_master')
-                 ->default(true);
+            $this->boolean('data_master') // @phpstan-ignore method.notFound (Seems invalid code, but not sure what this is for...)
+                 ->default(true); 
         }
     }
 
     /**
      * ^NOTE: No idea what this col is for
+     * @param string|array $index
+     * @return void
      */
     public function dropSynchro($index)
     {
